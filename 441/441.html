@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .course-list, .cart {
+            margin-bottom: 20px;
+        }
+        .course-item, .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .course-item button, .cart-item button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .cart-total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+ 
+<h1>Course Packages</h1>
+<div class="course-list">
+    <div class="course-item">
+        <span>Course 1</span>
+        <span>$10</span>
+        <button onclick="addToCart('course1', 10)">Add to Cart</button>
+    </div>
+    <div class="course-item">
+        <span>Course 2</span>
+        <span>$15</span>
+        <button onclick="addToCart('course2', 15)">Add to Cart</button>
+    </div>
+    <div class="course-item">
+        <span>Course 3</span>
+        <span>$20</span>
+        <button onclick="addToCart('course3', 20)">Add to Cart</button>
+    </div>
+    <div class="course-item">
+        <span>Course 4</span>
+        <span>$50</span>
+        <button onclick="addToCart('course4', 50)">Add to Cart</button>
+    </div>
+    <div class="course-item">
+        <span>Course 5</span>
+        <span>$85</span>
+        <button onclick="addToCart('course5', 85)">Add to Cart</button>
+    </div>
+</div>
+ 
+<h1>Shopping Cart</h1>
+<div class="cart">
+    <div id="cart-items" class="cart-item">
+        <!-- Cart items will be dynamically added here -->
+    </div>
+    <div class="cart-total">
+        Total: $<span id="cart-total">0</span>
+    </div>
+    <button onclick="clearCart()">Clear Cart</button>
+</div>
+ 
+<script>
+    let cart = {};
+    let cartTotal = 0;
+ 
+    function addToCart(courseId, price) {
+        if (!cart[courseId]) {
+            cart[courseId] = 0;
+        }
+        cart[courseId]++;
+        updateCart();
+    }
+ 
+    function updateCart() {
+        const cartItemsDiv = document.getElementById('cart-items');
+        cartItemsDiv.innerHTML = ''; // Clear cart items
+        let newTotal = 0;
+ 
+        for (let courseId in cart) {
+            const count = cart[courseId];
+            // Assuming course ID format is 'courseX' where X is the price, parsed as a number
+            const priceNum = parseFloat(courseId.replace('course', ''));
+            const price = priceNum * count;
+            newTotal += price;
+ 
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <span>${courseId.replace('course', 'Course')}</span>
+                <span>x${count}</span>
+                <span>$${price.toFixed(2)}</span>
+                <button onclick="removeFromCart('${courseId}')">Remove</button>
+            `;
+            cartItemsDiv.appendChild(cartItem);
+        }
+ 
+        document.getElementById('cart-total').textContent = newTotal.toFixed(2);
+        cartTotal = newTotal;
+    }
+ 
+    function removeFromCart(courseId) {
+        if (cart[courseId]) {
+            cart[courseId]--;
+            if (cart[courseId] === 0) {
+                delete cart[courseId];
+            }
+            updateCart();
+        }
+    }
+ 
+    function clearCart() {
+        cart = {};
+        cartTotal = 0;
+        updateCart();
+    }
+</script>
+ 
+</body>
+</html>
