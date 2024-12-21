@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车页面</title>
+    <link rel="stylesheet" href="Shopping Cart.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <div class="product-list">
+            <div class="product">
+                <h2>product 1</h2>
+                <p>price: $199</p>
+                <button onclick="addToCart('产品 1', 10)">add to cart</button>
+                <h2>product 2</h2>
+                <p>price: $299</p>
+                <button onclick="addToCart('产品 1', 10)">add to cart</button>
+                <h2>product 3</h2>
+                <p>price: $399</p>
+                <button onclick="addToCart('产品 1', 10)">add to cart</button>
+                <h2>product 4</h2>
+                <p>price: $499</p>
+                <button onclick="addToCart('产品 1', 10)">add to cart</button>
+                
+            </div>
+            <h2>product 5</h2>
+                <p>price: $599</p>
+                <button onclick="addToCart('产品 1', 10)">add to cart</button>
+                <h2>product 6</h2>
+                <p>price: $699</p>
+                <button onclick="addToCart('产品 1', 10)">add to cart</button>
+                <h2>product 7</h2>
+                <p>price: $799</p>
+                <button onclick="addToCart('产品 1', 10)">add to cart</button>
+                <h2>product 8</h2>
+                <p>price: $899</p>
+                <button onclick="addToCart('产品 1', 10)">add to cart</button>
+        </div>
+        <div class="cart">
+            <h2>Shopping Cart</h2>
+            <ul id="cart-list"></ul>
+            <p>Total price: $<span id="total-price">0</span></p>
+            <button onclick="checkout()">checkout</button>
+        </div>
+    </div>
+    <script src="Shopping Cart.js"></script>
+</body>
+</html>
+
+
